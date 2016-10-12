@@ -1,59 +1,12 @@
-腾讯企业邮箱开放接口PHP-SDK
-=================
-SDK利用腾讯企业邮箱提供的api，实现自己创建、修改、删除、登录邮箱...与公司的OA、网站无缝结合，支持帐号管理、邮件提醒、快捷登录等功能。
-
-安装
-------------------------
-
-
-### 1.使用Composer（推荐）
-如果还没有安装Composer, 点击[此处](https://getcomposer.org/doc/00-intro.md#installation-nix "composer")根据提示安装 .
-
-编辑composer.json文件
-```
-    {
-        "require": {
-            "feehi/exmail" : "*"
-        }
-    }
-```
-国内composer被墙了，使用镜像
-```
-    {
-        "require": {
-            "feehi/exmail" : "*"
-        },
-        "repositories": [
-            {"type": "composer", "url": "https://packagist.phpcomposer.com"},
-            {"packagist": false}
-        ]
-    }
-```
-
-```bash
-$ php composer.phar update
-```
-完毕后，在项目中
-```php 
-    require "/path/to/vendor/autoload.php";
-```
-
-### 2.使用归档文件
--------------------
-点击[此处](http://7xjkuy.com1.z0.glb.clouddn.com/exmail.tar.gz "腾讯企业邮箱PHP-SDK")下载归档文件
-
-解压，复制到项目中
-
-在src同级目录下有个autoload.php
-```php 
-    require "/path/to/autoload.php";
-```
-
-
-## 使用方法
-```php
+<?php
+/**
+ * Ahthor: lf
+ * Email: job@feehi.com
+ * Blog: http://blog.feehi.com
+ * Date: 2016/9/1912:34
+ */
 //出现ip_freq_block错误，请到腾讯企业邮箱web管理页面：可使用此开放接口的IP，添加/修改当前服务器的ip
-require "/path/to/autoload.php";
+require "../autoload.php";
 $client_id = '管理员账号';
 $client_secret = '接口key';
 $exmail = Feehi\Qqexmail::getInstance($client_id, $client_secret);
@@ -76,5 +29,3 @@ print_r( $exmail->groupAddPermission("sales@feehi.com", ['demo@feehi.com', 'newu
 print_r( $exmail->groupDeletePermission("sales@feehi.com", ["demo@feehi.com", "newuser@feehi.com"]) )."\r\n\r\n";//取消群发群组权限，取消demo1和demo2在sales群组下的群发邮件权限
 print_r( $exmail->enableForceWeChatToken("job@feehi.com") )."\r\n\r\n";//强制开启job@feehi.com登录需要微信验证
 print_r( $exmail->disForceWeChatToken("job@feehi.com") )."\r\n\r\n";//取消强制job@feehi.com登录需要微信验证
-
-```
